@@ -34,24 +34,23 @@ System.register(["angular2/core", "angular2/router", "../services/restaurante.se
                     this._routeParams = _routeParams;
                     this._router = _router;
                     this.titulo = "Editar restaurante";
+                    this.accion = "Editar restaurante";
                 }
                 RestauranteEditComponent.prototype.onSubmit = function () {
-                    /*this._restauranteService.addRestaurante(this.restaurante).subscribe(
-                        response => {
-                            this.status = response.status;
-                            if(this.status !== "success")
-                                alert("Error en el servidor");
-            
-                            },
-                        error => {
-                            this.errorMessage = <any>error;
-                            if(this.errorMessage !== null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                                }
-                        };
-                    
-                    this._router.navigate(["Home"]);*/
+                    var _this = this;
+                    var id = this._routeParams.get("id");
+                    this._restauranteService.editRestaurante(id, this.restaurante).subscribe(function (response) {
+                        _this.status = response.status;
+                        if (_this.status !== "success")
+                            alert("Error en el servidor");
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage !== null) {
+                            console.log(_this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    });
+                    this._router.navigate(["Home"]);
                 };
                 RestauranteEditComponent.prototype.ngOnInit = function () {
                     console.log("Componente RestauranteAdd Cargando");

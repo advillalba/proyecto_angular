@@ -20,6 +20,7 @@ export class RestauranteEditComponent implements onInit{
 	public errorMessage:string;
 	public status;
 	public restaurante: Restaurante;
+	public accion:string = "Editar restaurante";
 
 constructor(
 	private _restauranteService: RestauranteService,
@@ -27,7 +28,8 @@ constructor(
 	private _router: Router
 	){}
 	onSubmit() {
-		/*this._restauranteService.addRestaurante(this.restaurante).subscribe(
+		let id = this._routeParams.get("id");
+		this._restauranteService.editRestaurante(id, this.restaurante).subscribe(
 			response => {
 				this.status = response.status;
 				if(this.status !== "success")
@@ -42,7 +44,7 @@ constructor(
 					}
 			};
 		
-		this._router.navigate(["Home"]);*/
+		this._router.navigate(["Home"]);
 	}
 
 

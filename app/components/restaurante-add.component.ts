@@ -21,6 +21,7 @@ export class RestauranteAddComponent implements onInit{
 	public errorMessage:string;
 	public status;
 	public restaurante: Restaurante;
+	public accion:string = "Crear restaurante";
 
 constructor(
 
