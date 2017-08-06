@@ -4,6 +4,13 @@
 		<h1>{{titulo}}</h1></a>
 		<div class="clearfix"></div>
 </header>
+<nav id="nav">
+	<ul>
+		<li><a [routerLink]="['Home']">Inicio</a></li>
+		<li><a [routerLink]="['Home']">Crear restaurante</a></li>
+		<li><a [routerLink]="['Home']">¿Dónde cómo hoy?</a></li>
+	</ul>
+</nav>
 <section class="main">
 	<router-outlet></router-outlet>
 	<div class="clearfix"></div>
