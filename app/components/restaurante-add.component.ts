@@ -26,15 +26,42 @@ constructor(
 	private _routeParams: RouteParams,
 	private _router: Router
 	){}
+	onSubmit() {
+		this._restauranteService.addRestaurante(this.restaurante).subscribe(
+			response => {
+				this.status = response.status;
+				if(this.status !== "success")
+					alert("Error en el servidor");
+
+				},
+			error => {
+				this.errorMessage = <any>error;
+				if(this.errorMessage !== null) {
+					console.log(this.errorMessage);
+					alert("Error en la petición");
+					}
+			};
+		
+		this._router.navigate(["Home"]);
+	}
+
+
+
 
 	ngOnInit(){
 		console.log("Componente RestauranteAdd Cargando");
 		this.restaurante = new Restaurante(this._routeParams.get("id"),
 										  this._routeParams.get("nombre"),
-										  this._routeParams.get("direccion")
-										  this._routeParams.get("descripcion")
-										  this._routeParams.get("precio")
+										  this._routeParams.get("direccion"),
+										  this._routeParams.get("descripcion"),
+										  null,
+										  "normal"
 
 			);
 	}
+
+	callPrecio(value) {
+		this.restaurante.precio = value;
+	}
+
 }

@@ -20,7 +20,7 @@
 
 	<label>Precio:</label>
 	<p>
-		<select #precio>
+		<select (change)="callPrecio(precio.value)" #precio>
 				<option value="bajo">Bajo</option>
 				<option value="normal">normal</option>
 				<option value="alto">alto</option>

@@ -16,7 +16,7 @@ import {RestauranteAddComponent} from "./components/restaurante-add.component";
 @RouteConfig([
 {path: "/", name:"Home",component: RestaurantesListComponent, useAsDefault: true},
 {path: "/restaurante/:id", name:"Restaurante",component: RestauranteDetailsComponent},
-{path: "/crear-restaurante/", name:"CrearRestaurante",component: RestauranteAddComponent}
+{path: "/crear-restaurante/", name:"CrearRestaurante",component: RestauranteAddComponent
 
 	])
 // Clase del componente donde iran los datos y funcionalidades
