@@ -10,6 +10,7 @@ import {Restaurante} from "../model/Restaurante";
 @Component({
     selector: 'restaurantes-list',
     templateUrl:"app/view/restaurantes-list.html",
+    directives: [ROUTER_DIRECTIVES],
     providers: [RestauranteService]
     
 })
@@ -40,7 +41,7 @@ export class RestaurantesListComponent implements onInit{
 										if(this.status !== "success"){alert("Error en el servidor")};
 	//									box_restaurantes.style.display = "none";
 										this.loading = "hide";
-									};
+									},
 									error => {
 										this.errorMessage = <any>error;
 										if(this.errorMessage !== null) {
