@@ -1,6 +1,6 @@
 // Importar el núcleo de Angular
 import {Component, onInit} from "angular2/core";
-import {RouteParams} from "angular2/router";
+import {Router,RouteParams} from "angular2/router";
 import {RestauranteService} from "../services/restaurante.service";
 import {Restaurante} from "../model/Restaurante";
 
@@ -23,7 +23,8 @@ export class RestauranteDetailsComponent implements onInit{
 
 constructor(
 	private _restauranteService: RestauranteService,
-	private _routeParams: RouteParams
+	private _routeParams: RouteParams,
+	private _router: Router
 	){}
 
 	ngOnInit(){
@@ -37,7 +38,12 @@ constructor(
 			response => {
 					this.restaurante = response.data;
 					this.status = response.status;
-					if(this.status !== "success"){alert("Error en el servidor")};
+					if(this.status !== "success"){
+						//alert("Error en el servidor");
+						this._router.navigate(["Home"]);
+
+					}
+					
 										
 						},
 			error => {

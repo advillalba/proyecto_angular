@@ -10,7 +10,7 @@ body {
 
 #content {
 	width: 80%;
-	min-height: 500px:
+	min-height: 500px;
 	margin: 0 auto;
 	margin-top:20px;
 	border: 1px solid #ccc;
@@ -114,3 +114,36 @@ header h1 {
 	list-style: none;
 	text-decoration: none;
 }
+
+
+.restaurante-box .precio{
+	color: white;
+	background: green;
+	font-size:14px;
+	padding: 5px;
+	box-shadow: 2px 2px #016B01;
+	text-align: center;
+	width: 200px;
+}
+
+
+.restaurante-box .direccion{
+	color:grey;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
