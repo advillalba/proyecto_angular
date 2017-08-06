@@ -1,0 +1,28 @@
+<h1>Añadir nuevo restaurante</h1>
+<form #formRestaurante="ngForm" (ngSubmit)="onSubmit()">
+
+	<label>Nombre:</label>
+	<p>
+		<input type="text" #nombre="ngForm" ngControl="nombre" [(ngModel)]="restaurante.nombre"/>
+	</p>
+	<label>Direccion:</label>
+	<p>
+		<input type="text" #direccion="ngForm" ngControl="direccion" [(ngModel)]="restaurante.direccion"/>
+	</p>
+
+	<label>Descripcion:</label>
+	<p>
+		<textarea #descripcion="ngForm" ngControl="descripcion" [(ngModel)]="restaurante.descripcion"></textarea> 
+	</p>
+
+	<label>Precio:</label>
+	<p>
+		<select #precio>
+				<option value="bajo">Bajo</option>
+				<option value="normal">normal</option>
+				<option value="alto">alto</option>
+		</select>
+	</p>
+
+	<input type="submit" value="Crear restaurante"/>
+</form>
