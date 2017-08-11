@@ -22,6 +22,7 @@ export class RestaurantesListComponent implements onInit{
 	public status:string;
 	public errorMessage;
 	public loading:string;
+	public confirmado;
 	constructor (private _restauranteService: RestauranteService){}
 
 	ngOnInit(){
@@ -50,6 +51,34 @@ export class RestaurantesListComponent implements onInit{
 										}
 									}
 									)
+	}
+
+	onBorrarRestaurante(id:number) {
+		this._restauranteService.deleteRestaurante(id)
+								.subscribe(
+									result => {
+										this.status = result.status;
+
+										if(this.status !== "success"){alert("Error en el servidor")};
+	//									box_restaurantes.style.display = "none";
+										this.loading = "hide";
+										this.getRestaurantes();
+									},
+									error => {
+										this.errorMessage = <any>error;
+										if(this.errorMessage !== null) {
+											console.log(this.errorMessage);
+											alert("Error en la petición");
+										}
+									}
+									)
+	}
+	onBorrarConfirm(id:number) {
+		this.confirmado = id; 
+
+	}
+	onCancelarConfirm(id:number) {
+		this.confirmado = null;
 	}
 	
 }

@@ -57,6 +57,32 @@ System.register(["angular2/core", "angular2/router", "../services/restaurante.se
                         }
                     });
                 };
+                RestaurantesListComponent.prototype.onBorrarRestaurante = function (id) {
+                    var _this = this;
+                    this._restauranteService.deleteRestaurante(id)
+                        .subscribe(function (result) {
+                        _this.status = result.status;
+                        if (_this.status !== "success") {
+                            alert("Error en el servidor");
+                        }
+                        ;
+                        //									box_restaurantes.style.display = "none";
+                        _this.loading = "hide";
+                        _this.getRestaurantes();
+                    }, function (error) {
+                        _this.errorMessage = error;
+                        if (_this.errorMessage !== null) {
+                            console.log(_this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    });
+                };
+                RestaurantesListComponent.prototype.onBorrarConfirm = function (id) {
+                    this.confirmado = id;
+                };
+                RestaurantesListComponent.prototype.onCancelarConfirm = function (id) {
+                    this.confirmado = null;
+                };
                 RestaurantesListComponent = __decorate([
                     core_1.Component({
                         selector: 'restaurantes-list',
