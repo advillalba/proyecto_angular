@@ -26,6 +26,10 @@
 				<option value="alto" [attr.selected]="restaurante.precio === 'alto' ? 'selected' : null">alto</option>
 		</select>
 	</p>
+	<p>
+		<input type="file" placeholder="Subir imagen..."
+		(change)="fileChangeEvent($event)" > 
+	</p>
 
 	<input type="submit" value="{{accion}}" [disabled]="!formRestaurante.form.valid"/>
 </form>

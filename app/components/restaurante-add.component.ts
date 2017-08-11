@@ -23,6 +23,10 @@ export class RestauranteAddComponent implements onInit{
 	public restaurante: Restaurante;
 	public accion:string = "Crear restaurante";
 
+
+	public filesToUpload: Array<File>;
+
+
 constructor(
 
 	private _restauranteService: RestauranteService,
@@ -65,6 +69,42 @@ constructor(
 
 	callPrecio(value) {
 		this.restaurante.precio = value;
+	}
+
+	fileChangeEvent(fileInput:any) {
+		console.log("Entrando en la función fileChangeEvent");
+		this.filesToUpload = <Array<File>>fileInput.target.files;
+
+		this.makeFileRequest("http://localhost/slim/restaurantes-api.php/upload-file",
+			[], this.filesToUpload).then((result) => {
+				this.restaurante.imagen = result.filename;
+				console.log(result.filename);
+			}, (error) => {
+				console.log(error):
+				});
+
+	}
+	makeFileRequest(url:string, params:Array<string>, files:Array<File>) {
+		console.log("Entrando en la función makeFileRequest");
+		return new Promise((resolve, reject) => {
+				var formData:any = new FormData();
+				var xhr = new XMLHttpRequest();
+
+				for(var i = 0; i < files.length; i++){
+					formData.append("uploads[]", files[i], files[i].name);
+				}
+				xhr.onreadystatechange = function () {
+					if(xhr.readyState == 4){
+						if(xhr.status == 200) {
+							resolve(JSON.parse(xhr.response));
+						} else {
+							reject(xhr.response);
+						}
+					}
+				}
+				xhr.open("POST", url,true);
+				xhr.send(formData);
+			});
 	}
 
 }

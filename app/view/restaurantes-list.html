@@ -2,8 +2,10 @@
 
 <ul id="restaurantes-list">
 		<img *ngIf="loading=='show'" src="../../assets/images/loader.gif"/>
-	<li *ngFor="#restaurante of restaurantes" class="restaurante-item">
-		<div class="image"></div>
+		<li *ngFor="#restaurante of restaurantes" class="restaurante-item">
+		<div class="image">
+			<img src="http://localhost/slim/uploads/{{restaurante.imagen}}" *ngIf="restaurante.imagen && restaurante.imagen !==null">
+		</div>
 		<div class="data">
 			<h4>{{restaurante.nombre}}</h4>
 			<p>{{restaurante.direccion}}</p>
@@ -14,7 +16,7 @@
 			</p>
 			<div class="seguro" *ngIf="confirmado === restaurante.id">
 				<a  (click)="onBorrarRestaurante(restaurante.id)" class="btn btn-eliminar">Eliminar</a>
-				<a  (click)="onBorrarRestaurante(restaurante.id)" class="btn btn-ver">Cancelar</a>
+				<a  (click)="onCancelarConfirm(restaurante.id)" class="btn btn-ver">Cancelar</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
