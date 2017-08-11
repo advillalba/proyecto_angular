@@ -83,7 +83,8 @@ System.register(["angular2/core", "angular2/router", "../services/restaurante.se
                     console.log("Entrando en la función fileChangeEvent");
                     this.filesToUpload = fileInput.target.files;
                     this.makeFileRequest("http://localhost/slim/restaurantes-api.php/upload-file", [], this.filesToUpload).then(function (result) {
-                        _this.restaurante.imagen = result.filename;
+                        _this.resultUpload = result;
+                        _this.restaurante.imagen = _this.resultUpload.filename;
                         console.log(result.filename);
                     }, function (error) {
                         console.log(error);

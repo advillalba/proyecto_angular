@@ -22,7 +22,7 @@ export class RestauranteAddComponent implements onInit{
 	public status;
 	public restaurante: Restaurante;
 	public accion:string = "Crear restaurante";
-
+	public resultUpload;
 
 	public filesToUpload: Array<File>;
 
@@ -71,13 +71,17 @@ constructor(
 		this.restaurante.precio = value;
 	}
 
+	
+
 	fileChangeEvent(fileInput:any) {
 		console.log("Entrando en la función fileChangeEvent");
 		this.filesToUpload = <Array<File>>fileInput.target.files;
 
-		this.makeFileRequest("http://localhost/slim/restaurantes-api.php/upload-file",
+		this.makeFileRequest(
+			"http://localhost/slim/restaurantes-api.php/upload-file",
 			[], this.filesToUpload).then((result) => {
-				this.restaurante.imagen = result.filename;
+				this.resultUpload = result;
+				this.restaurante.imagen = this.resultUpload.filename;
 				console.log(result.filename);
 			}, (error) => {
 				console.log(error):
