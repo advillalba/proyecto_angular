@@ -30,9 +30,16 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
                     return this._http.get("http://localhost/slim/restaurantes-api.php/restaurantes")
                         .map(function (res) { return res.json(); });
                 };
-                RestauranteService.prototype.getRestaurante = function (id) {
-                    return this._http.get("http://localhost/slim/restaurantes-api.php/restaurante/" + id)
-                        .map(function (res) { return res.json(); });
+                RestauranteService.prototype.getRestaurante = function (id, random) {
+                    if (random === void 0) { random = null; }
+                    if (random == null) {
+                        return this._http.get("http://localhost/slim/restaurantes-api.php/restaurante/" + id)
+                            .map(function (res) { return res.json(); });
+                    }
+                    else {
+                        return this._http.get("http://localhost/slim/restaurantes-api.php/random-restaurante")
+                            .map(function (res) { return res.json(); });
+                    }
                 };
                 RestauranteService.prototype.addRestaurante = function (restaurante) {
                     var json = JSON.stringify(restaurante);

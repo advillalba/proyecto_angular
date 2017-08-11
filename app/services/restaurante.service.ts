@@ -13,9 +13,14 @@ export class RestauranteService {
  	.map(res => res.json());
  }
 
- getRestaurante(id:string) {
-	 return this._http.get("http://localhost/slim/restaurantes-api.php/restaurante/"+id)
-	 .map(res => res.json());
+ getRestaurante(id:string, random = null) {
+ 	if (random == null) {
+	 	return this._http.get("http://localhost/slim/restaurantes-api.php/restaurante/"+id)
+	 	.map(res => res.json());
+	 } else {
+	 	return this._http.get("http://localhost/slim/restaurantes-api.php/random-restaurante")
+	 	.map(res => res.json());
+	 }
 }
 addRestaurante(restaurante:Restaurante){
 	let json = JSON.stringify(restaurante);
