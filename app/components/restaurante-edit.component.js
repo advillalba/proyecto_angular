@@ -78,6 +78,39 @@ System.register(["angular2/core", "angular2/router", "../services/restaurante.se
                 RestauranteEditComponent.prototype.callPrecio = function (value) {
                     this.restaurante.precio = value;
                 };
+                RestauranteEditComponent.prototype.fileChangeEvent = function (fileInput) {
+                    var _this = this;
+                    console.log("Entrando en la función fileChangeEvent");
+                    this.filesToUpload = fileInput.target.files;
+                    this.makeFileRequest("http://localhost/slim/restaurantes-api.php/upload-file", [], this.filesToUpload).then(function (result) {
+                        _this.restaurante.imagen = result.filename;
+                        console.log(result.filename);
+                    }, function (error) {
+                        console.log(error);
+                    });
+                };
+                RestauranteEditComponent.prototype.makeFileRequest = function (url, params, files) {
+                    console.log("Entrando en la función makeFileRequest");
+                    return new Promise(function (resolve, reject) {
+                        var formData = new FormData();
+                        var xhr = new XMLHttpRequest();
+                        for (var i = 0; i < files.length; i++) {
+                            formData.append("uploads[]", files[i], files[i].name);
+                        }
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4) {
+                                if (xhr.status == 200) {
+                                    resolve(JSON.parse(xhr.response));
+                                }
+                                else {
+                                    reject(xhr.response);
+                                }
+                            }
+                        };
+                        xhr.open("POST", url, true);
+                        xhr.send(formData);
+                    });
+                };
                 RestauranteEditComponent = __decorate([
                     core_1.Component({
                         selector: 'restaurantes-edit',
